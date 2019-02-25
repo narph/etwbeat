@@ -1,0 +1,10 @@
+# Module: iis
+# Docs: https://www.elastic.co/guide/en/beats/metricbeat/master/metricbeat-module-iis.html
+
+- module: iis
+  metricsets:
+    - webserver
+    - website
+  enabled: true
+  period: 10s
+

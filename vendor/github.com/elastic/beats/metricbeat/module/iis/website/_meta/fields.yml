@@ -1,0 +1,9 @@
+- name: website
+  type: group
+  description: >
+    website
+  fields:
+    - name: example
+      type: keyword
+      description: >
+        Example field
