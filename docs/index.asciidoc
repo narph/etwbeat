@@ -1,5 +1,0 @@
-= Etwbeat Docs
-
-Welcome to the Etwbeat documentation.
-
-
