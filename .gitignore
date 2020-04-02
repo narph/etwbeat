@@ -12,6 +12,8 @@
 coverage.out
 .python-version
 mage_output_file.go
+etwbeat
+run_main.exe
 
 # Editor swap files
 *.swp
