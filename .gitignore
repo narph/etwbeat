@@ -1,7 +1,28 @@
+
+/.vagrant
 /.idea
+/.vscode
 /build
+/*/*.template*.json
+**/html_docs
 
 .DS_Store
-/etwbeat
-/etwbeat.test
+*.dev.yml
+*.generated.yml
+coverage.out
+.python-version
+mage_output_file.go
+
+# Editor swap files
+*.swp
+*.swo
+*.swn
+
+# Compiled Object files, Static and Dynamic libs (Shared Objects)
+*.o
+*.a
+*.so
+*.exe
+*.test
+*.prof
 *.pyc
