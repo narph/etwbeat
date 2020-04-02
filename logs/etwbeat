@@ -1,0 +1,130 @@
+2020-04-01T15:15:02.270+0200	INFO	instance/beat.go:609	Home path: [C:\Users\Mariana\WORK\GO\src\github.com\narph\etwbeat] Config path: [C:\Users\Mariana\WORK\GO\src\github.com\narph\etwbeat] Data path: [C:\Users\Mariana\WORK\GO\src\github.com\narph\etwbeat\data] Logs path: [C:\Users\Mariana\WORK\GO\src\github.com\narph\etwbeat\logs]
+2020-04-01T15:15:02.288+0200	INFO	instance/beat.go:617	Beat ID: 7c157c32-076a-475d-8770-e0e00310a5ee
+2020-04-01T15:15:02.364+0200	INFO	[beat]	instance/beat.go:945	Beat info	{"system_info": {"beat": {"path": {"config": "C:\\Users\\Mariana\\WORK\\GO\\src\\github.com\\narph\\etwbeat", "data": "C:\\Users\\Mariana\\WORK\\GO\\src\\github.com\\narph\\etwbeat\\data", "home": "C:\\Users\\Mariana\\WORK\\GO\\src\\github.com\\narph\\etwbeat", "logs": "C:\\Users\\Mariana\\WORK\\GO\\src\\github.com\\narph\\etwbeat\\logs"}, "type": "etwbeat", "uuid": "7c157c32-076a-475d-8770-e0e00310a5ee"}}}
+2020-04-01T15:15:02.367+0200	INFO	[beat]	instance/beat.go:954	Build info	{"system_info": {"build": {"commit": "unknown", "libbeat": "8.0.0", "time": "1754-08-30T22:43:41.128Z", "version": "8.0.0"}}}
+2020-04-01T15:15:02.366+0200	INFO	[add_cloud_metadata]	add_cloud_metadata/add_cloud_metadata.go:89	add_cloud_metadata: hosting provider type not detected.
+2020-04-01T15:15:02.367+0200	INFO	[beat]	instance/beat.go:957	Go runtime info	{"system_info": {"go": {"os":"windows","arch":"amd64","max_procs":4,"version":"go1.13.8"}}}
+2020-04-01T15:15:02.405+0200	INFO	[beat]	instance/beat.go:961	Host info	{"system_info": {"host": {"architecture":"x86_64","boot_time":"2020-04-01T11:55:09.11+02:00","name":"DESKTOP-RFOOE09","ip":["fe80::c428:b0cd:d776:2999/64","172.17.241.81/28","fe80::31c1:8a71:5a2b:8b51/64","169.254.139.81/16","fe80::5d83:4428:eb69:6d47/64","169.254.109.71/16","fe80::d88d:d3cb:7338:7680/64","192.168.1.5/24","fe80::adc8:e8:c7c3:3f56/64","169.254.63.86/16","::1/128","127.0.0.1/8"],"kernel_version":"10.0.18362.720 (WinBuild.160101.0800)","mac":["00:15:5d:1f:f1:b5","9e:b6:d0:de:97:a9","ae:b6:d0:de:97:a9","9c:b6:d0:de:97:a9","9c:b6:d0:de:97:aa"],"os":{"family":"windows","platform":"windows","name":"Windows 10 Pro","version":"10.0","major":10,"minor":0,"patch":0,"build":"18362.720"},"timezone":"CEST","timezone_offset_sec":7200,"id":"1e50b6e1-9710-4164-a8f0-032b3c721dc3"}}}
+2020-04-01T15:15:02.417+0200	INFO	[beat]	instance/beat.go:990	Process info	{"system_info": {"process": {"cwd": "C:\\Users\\Mariana\\WORK\\GO\\src\\github.com\\narph\\etwbeat", "exe": "C:\\Users\\Mariana\\WORK\\GO\\src\\github.com\\narph\\etwbeat\\run_main.exe", "name": "run_main.exe", "pid": 15812, "ppid": 21324, "start_time": "2020-04-01T15:14:58.438+0200"}}}
+2020-04-01T15:15:02.418+0200	INFO	instance/beat.go:296	Setup Beat: etwbeat; Version: 8.0.0
+2020-04-01T15:15:02.418+0200	INFO	[index-management]	idxmgmt/std.go:182	Set output.elasticsearch.index to 'etwbeat-8.0.0' as ILM is enabled.
+2020-04-01T15:15:02.418+0200	INFO	eslegclient/connection.go:84	elasticsearch url: http://localhost:9200
+2020-04-01T15:15:02.419+0200	INFO	[publisher]	pipeline/module.go:110	Beat name: DESKTOP-RFOOE09
+2020-04-01T15:15:23.059+0200	INFO	instance/beat.go:437	etwbeat start running.
+2020-04-01T15:15:23.059+0200	INFO	[monitoring]	log/log.go:118	Starting metrics logging every 30s
+2020-04-01T15:15:24.263+0200	INFO	beater/ETWbeat.go:37	etwbeat is running! Hit CTRL-C to stop it.
+2020-04-01T15:15:25.266+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:26.264+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:26.267+0200	INFO	[publisher_pipeline_output]	pipeline/output.go:101	Connecting to backoff(elasticsearch(http://localhost:9200))
+2020-04-01T15:15:27.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:28.267+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:28.540+0200	INFO	[esclientleg]	eslegclient/connection.go:263	Attempting to connect to Elasticsearch version 7.6.0
+2020-04-01T15:15:28.684+0200	INFO	[esclientleg]	eslegclient/connection.go:263	Attempting to connect to Elasticsearch version 7.6.0
+2020-04-01T15:15:28.729+0200	INFO	[index-management]	idxmgmt/std.go:258	Auto ILM enable success.
+2020-04-01T15:15:29.224+0200	INFO	[index-management]	idxmgmt/std.go:271	ILM policy successfully loaded.
+2020-04-01T15:15:29.224+0200	INFO	[index-management]	idxmgmt/std.go:410	Set setup.template.name to '{etwbeat-8.0.0 {now/d}-000001}' as ILM is enabled.
+2020-04-01T15:15:29.224+0200	INFO	[index-management]	idxmgmt/std.go:415	Set setup.template.pattern to 'etwbeat-8.0.0-*' as ILM is enabled.
+2020-04-01T15:15:29.224+0200	INFO	[index-management]	idxmgmt/std.go:449	Set settings.index.lifecycle.rollover_alias in template to {etwbeat-8.0.0 {now/d}-000001} as ILM is enabled.
+2020-04-01T15:15:29.225+0200	INFO	[index-management]	idxmgmt/std.go:453	Set settings.index.lifecycle.name in template to {etwbeat {"policy":{"phases":{"hot":{"actions":{"rollover":{"max_age":"30d","max_size":"50gb"}}}}}}} as ILM is enabled.
+2020-04-01T15:15:29.245+0200	INFO	template/load.go:169	Existing template will be overwritten, as overwrite is enabled.
+2020-04-01T15:15:29.264+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:29.357+0200	INFO	template/load.go:109	Try loading template etwbeat-8.0.0 to Elasticsearch
+2020-04-01T15:15:29.605+0200	INFO	template/load.go:101	template with name 'etwbeat-8.0.0' loaded.
+2020-04-01T15:15:29.606+0200	INFO	[index-management]	idxmgmt/std.go:295	Loaded index template.
+2020-04-01T15:15:30.295+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:30.539+0200	INFO	[index-management]	idxmgmt/std.go:306	Write alias successfully generated.
+2020-04-01T15:15:30.540+0200	INFO	[publisher_pipeline_output]	pipeline/output.go:111	Connection to backoff(elasticsearch(http://localhost:9200)) established
+2020-04-01T15:15:31.336+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:32.348+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:33.288+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:34.281+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:35.290+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:36.264+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:37.265+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:38.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:39.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:40.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:41.296+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:42.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:43.265+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:44.265+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:45.264+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:46.264+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:47.309+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:48.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:49.264+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:50.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:51.272+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:52.271+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:53.272+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:54.268+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:54.269+0200	ERROR	instance/metrics.go:92	Error while getting memory usage: error retrieving process stats: cannot find matching process for pid=15812
+2020-04-01T15:15:54.269+0200	ERROR	instance/metrics.go:136	Error retrieving CPU percentages: error retrieving process stats: cannot find matching process for pid=15812
+2020-04-01T15:15:54.269+0200	INFO	[monitoring]	log/log.go:145	Non-zero metrics in the last 30s	{"monitoring": {"metrics": {"beat":{"handles":{"open":229},"info":{"ephemeral_id":"76ae2e50-41d2-4353-93c8-f75de0b0f2ea","uptime":{"ms":52065}},"memstats":{"gc_next":5581568,"memory_alloc":3582200,"memory_total":19489080},"runtime":{"goroutines":14}},"libbeat":{"config":{"module":{"running":0}},"output":{"events":{"acked":28,"batches":15,"total":28},"type":"elasticsearch"},"pipeline":{"clients":1,"events":{"active":2,"published":30,"retry":2,"total":30},"queue":{"acked":28}}},"system":{"cpu":{"cores":4}}}}}
+2020-04-01T15:15:55.268+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:56.270+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:57.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:58.270+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:15:59.270+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:00.275+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:01.276+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:02.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:03.276+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:04.277+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:05.276+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:06.276+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:07.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:08.267+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:09.264+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:10.273+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:11.268+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:12.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:13.272+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:14.274+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:15.269+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:16.264+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:17.265+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:18.279+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:19.267+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:20.278+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:21.276+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:22.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:23.267+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:24.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:24.263+0200	ERROR	instance/metrics.go:92	Error while getting memory usage: error retrieving process stats: cannot find matching process for pid=15812
+2020-04-01T15:16:24.263+0200	ERROR	instance/metrics.go:136	Error retrieving CPU percentages: error retrieving process stats: cannot find matching process for pid=15812
+2020-04-01T15:16:24.263+0200	INFO	[monitoring]	log/log.go:145	Non-zero metrics in the last 30s	{"monitoring": {"metrics": {"beat":{"handles":{"open":232},"info":{"ephemeral_id":"76ae2e50-41d2-4353-93c8-f75de0b0f2ea","uptime":{"ms":82060}},"memstats":{"gc_next":5477232,"memory_alloc":3841760,"memory_total":24201224},"runtime":{"goroutines":14}},"libbeat":{"config":{"module":{"running":0}},"output":{"events":{"acked":30,"batches":18,"total":30}},"pipeline":{"clients":1,"events":{"active":2,"published":30,"total":30},"queue":{"acked":30}}}}}}
+2020-04-01T15:16:25.264+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:26.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:27.265+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:28.278+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:29.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:30.265+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:31.296+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:32.269+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:33.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:34.264+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:35.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:36.265+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:37.281+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:38.272+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:39.267+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:40.271+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:41.265+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:42.265+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:43.265+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:44.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:45.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:46.264+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:47.272+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:48.273+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:49.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:50.264+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:51.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:52.263+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:53.265+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:54.266+0200	INFO	beater/ETWbeat.go:62	Event sent
+2020-04-01T15:16:54.266+0200	ERROR	instance/metrics.go:92	Error while getting memory usage: error retrieving process stats: cannot find matching process for pid=15812
+2020-04-01T15:16:54.267+0200	ERROR	instance/metrics.go:136	Error retrieving CPU percentages: error retrieving process stats: cannot find matching process for pid=15812
+2020-04-01T15:16:54.268+0200	INFO	[monitoring]	log/log.go:145	Non-zero metrics in the last 30s	{"monitoring": {"metrics": {"beat":{"handles":{"open":234},"info":{"ephemeral_id":"76ae2e50-41d2-4353-93c8-f75de0b0f2ea","uptime":{"ms":112062}},"memstats":{"gc_next":5544000,"memory_alloc":4135232,"memory_total":29160872},"runtime":{"goroutines":14}},"libbeat":{"config":{"module":{"running":0}},"output":{"events":{"acked":30,"batches":20,"total":32}},"pipeline":{"clients":1,"events":{"active":2,"published":30,"total":30},"queue":{"acked":30}}}}}}
+2020-04-01T15:16:55.267+0200	INFO	beater/ETWbeat.go:62	Event sent
