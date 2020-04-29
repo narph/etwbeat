@@ -1,8 +1,9 @@
 package etw
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestConsumeEvents(t *testing.T) {
@@ -11,14 +12,6 @@ func TestConsumeEvents(t *testing.T) {
 	err := ConsumeEvents(guid)
 	assert.NoError(t, err)
 }
-
-
-
-
-
-
-
-
 
 func TestConsumerReadEvents(t *testing.T) {
 	//guid := "{EDD08927-9CC4-4E65-B970-C2560FB5C289}"

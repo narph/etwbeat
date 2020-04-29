@@ -1,14 +1,13 @@
 package etw
 
-
 import (
-"bytes"
-"encoding/binary"
-"errors"
-"fmt"
-"io"
-"os"
-"reflect"
+	"bytes"
+	"encoding/binary"
+	"errors"
+	"fmt"
+	"io"
+	"os"
+	"reflect"
 )
 
 // Endianness interface definition specifies the endianness used to decode
@@ -169,7 +168,6 @@ func Marshal(data interface{}, endianness Endianness) ([]byte, error) {
 	}
 	return out, nil
 }
-
 
 func unmarshalArray(reader io.Reader, data interface{}, endianness Endianness) error {
 	val := reflect.ValueOf(data)

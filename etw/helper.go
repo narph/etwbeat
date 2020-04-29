@@ -30,4 +30,3 @@ func GUIDFromString(guid string) (*GUID, error) {
 
 	return &g, nil
 }
-

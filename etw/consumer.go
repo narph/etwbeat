@@ -1,16 +1,18 @@
 package etw
 
 import (
+	"regexp"
+	"syscall"
+
+	"github.com/narph/etwbeat/config"
+	"github.com/pkg/errors"
+
 	"github.com/elastic/beats/v7/libbeat/beat"
 	"github.com/elastic/beats/v7/libbeat/common"
 	"github.com/elastic/beats/v7/libbeat/common/fmtstr"
 	"github.com/elastic/beats/v7/libbeat/logp"
 	"github.com/elastic/beats/v7/libbeat/processors"
 	"github.com/elastic/beats/v7/libbeat/processors/add_formatted_index"
-	"github.com/narph/etwbeat/config"
-	"github.com/pkg/errors"
-	"regexp"
-	"syscall"
 )
 
 var (
@@ -82,7 +84,7 @@ type Consumer struct {
 	Config     consumerConfig
 	eventMeta  common.EventMetadata
 	processors beat.ProcessorList
-	client      beat.Client
+	client     beat.Client
 }
 
 type Session struct {
@@ -90,14 +92,14 @@ type Session struct {
 	ProviderId    *GUID
 	Handle        uintptr
 	SessionHandle uint64
-	Properties *EventTraceProperties
+	Properties    *EventTraceProperties
 }
 
 type consumerConfig struct {
 	common.EventMetadata `config:",inline"`       // Fields and tags to add to events.
 	Processors           processors.PluginConfig  `config:"processors"`
 	Index                fmtstr.EventFormatString `config:"index"`
-	Providers []config.Provider
+	Providers            []config.Provider
 }
 
 func NewConsumer(options *common.Config, beatInfo beat.Info) (*Consumer, error) {
@@ -127,7 +129,7 @@ func (c *Consumer) Run(
 			"session")
 		return
 	}
-c.client = client
+	c.client = client
 	// close client on function return or when `done` is triggered (unblock client)
 	defer c.client.Close()
 	go func() {
@@ -150,8 +152,7 @@ c.client = client
 		}
 	}()
 
-
-	err= c.ReadEvents()
+	err = c.ReadEvents()
 	if err != nil {
 		logp.Warn("EventLog[%s] Close() error. %v", session, err)
 		return
@@ -229,14 +230,14 @@ func (c *Consumer) EnableTrace(guid string, session string) error {
 	); err != nil {
 		return errors.Wrap(err, "Failed to enable trace")
 	}
-	c.Sessions = append(c.Sessions, Session{Name: session, ProviderId: g, Handle: sessionHandle, Properties:sessionProperties})
+	c.Sessions = append(c.Sessions, Session{Name: session, ProviderId: g, Handle: sessionHandle, Properties: sessionProperties})
 	return nil
 }
 
 func (c *Consumer) CloseTrace(sessionName string) error {
 	for _, session := range c.Sessions {
 		if session.Name == sessionName {
-			 ControlTrace(session.Handle, nil, session.Properties, EVENT_TRACE_CONTROL_STOP)
+			ControlTrace(session.Handle, nil, session.Properties, EVENT_TRACE_CONTROL_STOP)
 			return EnableTraceEx2(session.Handle, session.ProviderId, EVENT_CONTROL_CODE_DISABLE_PROVIDER, 0, 0, 0, 0, nil)
 		}
 	}
@@ -272,12 +273,10 @@ func (c *Consumer) CloseSession(handle uint64) {
 	CloseTrace(handle)
 }
 
-
 func BufferCallback(etl *EventTraceLogfile) uintptr {
 	_ = etl
 	return 1
 }
-
 
 func (c Consumer) EventRecCallback(er *EventRecord) uintptr {
 	c.client.Publish(er.ToEvent())

@@ -7,13 +7,13 @@ import (
 )
 
 var (
-	advapi                                               = syscall.NewLazyDLL("advapi32.dll")
-	closeTrace                                           = advapi.NewProc("CloseTrace")
-	controlTraceW                                        = advapi.NewProc("ControlTraceW")
-	enableTraceEx2                                       = advapi.NewProc("EnableTraceEx2")
-	openTraceW                                           = advapi.NewProc("OpenTraceW")
-	processTrace                                         = advapi.NewProc("ProcessTrace")
-	startTraceW                                          = advapi.NewProc("StartTraceW")
+	advapi         = syscall.NewLazyDLL("advapi32.dll")
+	closeTrace     = advapi.NewProc("CloseTrace")
+	controlTraceW  = advapi.NewProc("ControlTraceW")
+	enableTraceEx2 = advapi.NewProc("EnableTraceEx2")
+	openTraceW     = advapi.NewProc("OpenTraceW")
+	processTrace   = advapi.NewProc("ProcessTrace")
+	startTraceW    = advapi.NewProc("StartTraceW")
 )
 
 type EventTraceProperties struct {

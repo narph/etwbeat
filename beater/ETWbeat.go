@@ -2,11 +2,13 @@ package beater
 
 import (
 	"fmt"
+	"sync"
+
+	"github.com/narph/etwbeat/etw"
+
 	"github.com/elastic/beats/v7/libbeat/beat"
 	"github.com/elastic/beats/v7/libbeat/common"
 	"github.com/elastic/beats/v7/libbeat/logp"
-	"github.com/narph/etwbeat/etw"
-	"sync"
 
 	"github.com/narph/etwbeat/config"
 )
