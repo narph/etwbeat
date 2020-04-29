@@ -3,12 +3,12 @@
 
 package config
 
-import "time"
-
-type Config struct {
-	Period time.Duration `config:"period"`
+type ETWConfig struct {
+	Providers       []Provider `config:"providers"`
 }
 
-var DefaultConfig = Config{
-	Period: 1 * time.Second,
+type Provider struct {
+	Id string `config:"id"`
+	SessionName string `config:"session_name"`
 }
+
