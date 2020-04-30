@@ -13,6 +13,7 @@ var (
 	enableTraceEx2 = advapi.NewProc("EnableTraceEx2")
 	openTraceW     = advapi.NewProc("OpenTraceW")
 	processTrace   = advapi.NewProc("ProcessTrace")
+	queryTraceW    = advapi.NewProc("QueryTraceW")
 	startTraceW    = advapi.NewProc("StartTraceW")
 )
 
@@ -96,10 +97,6 @@ type TraceLogfileHeader struct {
 	BuffersLost        uint32
 }
 
-func (e *EventTraceLogfile) SetProcessTraceMode(ptm uint32) {
-	e.Union1 = ptm
-}
-
 type TimeZoneInformation struct {
 	Bias         int32
 	StandardName [32]uint16
@@ -158,6 +155,10 @@ type FileTime struct {
 	dwHighDateTime uint32
 }
 
+func (e *EventTraceLogfile) SetProcessTraceMode(ptm uint32) {
+	e.Union1 = ptm
+}
+
 func (g *GUID) String() string {
 	return fmt.Sprintf("{%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X}",
 		g.Data1,
@@ -167,9 +168,7 @@ func (g *GUID) String() string {
 		g.Data4[2], g.Data4[3], g.Data4[4], g.Data4[5], g.Data4[6], g.Data4[7])
 }
 
-func StartTrace(traceHandle *uintptr,
-	instanceName *uint16,
-	properties *EventTraceProperties) error {
+func _StartTrace(traceHandle *uintptr, instanceName *uint16, properties *EventTraceProperties) error {
 	r1, _, _ := startTraceW.Call(
 		uintptr(unsafe.Pointer(traceHandle)),
 		uintptr(unsafe.Pointer(instanceName)),
@@ -180,14 +179,7 @@ func StartTrace(traceHandle *uintptr,
 	return syscall.Errno(r1)
 }
 
-func EnableTraceEx2(traceHandle uintptr,
-	providerId *GUID,
-	controlCode uint32,
-	level uint8,
-	matchAnyKeyword uint64,
-	matchAllKeyword uint64,
-	timeout uint32,
-	enableParameters *EnableTraceParameters) error {
+func _EnableTraceEx2(traceHandle uintptr, providerId *GUID, controlCode uint32, level uint8, matchAnyKeyword uint64, matchAllKeyword uint64, timeout uint32, enableParameters *EnableTraceParameters) error {
 	r1, _, _ := enableTraceEx2.Call(
 		uintptr(traceHandle),
 		uintptr(unsafe.Pointer(providerId)),
@@ -203,10 +195,7 @@ func EnableTraceEx2(traceHandle uintptr,
 	return syscall.Errno(r1)
 }
 
-func ProcessTrace(handleArray *uint64,
-	handleCount uint32,
-	startTime *FileTime,
-	endTime *FileTime) error {
+func _ProcessTrace(handleArray *uint64, handleCount uint32, startTime *FileTime, endTime *FileTime) error {
 	r1, _, _ := processTrace.Call(
 		uintptr(unsafe.Pointer(handleArray)),
 		uintptr(handleCount),
@@ -218,7 +207,7 @@ func ProcessTrace(handleArray *uint64,
 	return syscall.Errno(r1)
 }
 
-func OpenTrace(logfile *EventTraceLogfile) (uint64, error) {
+func _OpenTrace(logfile *EventTraceLogfile) (uint64, error) {
 	r1, _, err := openTraceW.Call(
 		uintptr(unsafe.Pointer(logfile)))
 	if err.(syscall.Errno) == 0 {
@@ -227,10 +216,7 @@ func OpenTrace(logfile *EventTraceLogfile) (uint64, error) {
 	return uint64(r1), err
 }
 
-func ControlTrace(traceHandle uintptr,
-	instanceName *uint16,
-	properties *EventTraceProperties,
-	controlCode uint32) (uint32, error) {
+func _ControlTrace(traceHandle uintptr, instanceName *uint16, properties *EventTraceProperties, controlCode uint32) (uint32, error) {
 	r1, _, err := controlTraceW.Call(
 		uintptr(traceHandle),
 		uintptr(unsafe.Pointer(instanceName)),
@@ -242,7 +228,7 @@ func ControlTrace(traceHandle uintptr,
 	return uint32(r1), err
 }
 
-func CloseTrace(traceHandle uint64) (uint32, error) {
+func _CloseTrace(traceHandle uint64) (uint32, error) {
 	r1, _, err := closeTrace.Call(
 		uintptr(traceHandle))
 	if err.(syscall.Errno) == 0 {

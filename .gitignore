@@ -59,4 +59,4 @@ cover/
 /tests/system/last_run
 profile.cov
 /docs/html_docs
-
+/logs

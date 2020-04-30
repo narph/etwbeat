@@ -1,6 +1,8 @@
 package etw
 
-import "unsafe"
+import (
+	"unsafe"
+)
 
 const (
 	WNODE_FLAG_ALL_DATA        = 0x00000001
@@ -14,8 +16,12 @@ func NewSession(sessionName string) *EventTraceProperties {
 
 	// Necessary fields for SessionProperties struct
 	sessionProperties.Wnode.BufferSize = uint32(size)
-	sessionProperties.Wnode.Guid = GUID{} // To set
-	sessionProperties.Wnode.ClientContext = 0
+	guid, err := randomGUID()
+	if err != nil {
+		return nil
+	}
+	sessionProperties.Wnode.Guid = guid
+	sessionProperties.Wnode.ClientContext = 1
 	sessionProperties.Wnode.Flags = WNODE_FLAG_ALL_DATA
 	sessionProperties.LogFileMode = EVENT_TRACE_REAL_TIME_MODE
 	sessionProperties.LogFileNameOffset = 0

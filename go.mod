@@ -21,6 +21,7 @@ require (
 	github.com/dop251/goja_nodejs v0.0.0-20200128125109-2d688c7e0ac4 // indirect
 	github.com/elastic/beats/v7 v7.0.0-alpha2.0.20200401122304-58a3ddc3462e
 	github.com/go-sourcemap/sourcemap v2.1.3+incompatible // indirect
+	github.com/gofrs/uuid v3.2.0+incompatible
 	github.com/josephspurrier/goversioninfo v0.0.0-20200309025242-14b0ab84c6ca // indirect
 	github.com/magefile/mage v1.9.0
 	github.com/mattn/go-colorable v0.1.2 // indirect

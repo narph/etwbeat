@@ -1,10 +1,15 @@
-################### {Beat} Configuration Example #########################
+###################### ETWBeat Configuration Example ########################
 
-############################# {Beat} ######################################
+# This file is an example configuration file highlighting only the most common
+# options. The etwbeat.reference.yml file from the same directory contains
+# all the supported options with more comments. You can use it as a reference.
 
-etwbeat:
-  # Defines how often an event is sent to the output
-  period: 1s
+#======================= ETWbeat specific options ===========================
+
+# providers specifies a list of providers.
+etwbeat.providers:
+- id: "EDD08927-9CC4-4E65-B970-C2560FB5C289"
+  session_name: "testsession"
 
 #================================ General ======================================
 

@@ -3,9 +3,13 @@ package etw
 import (
 	"encoding/binary"
 	"fmt"
+	"github.com/gofrs/uuid"
+	"regexp"
 	"strconv"
 	"strings"
 )
+
+var guidRE = regexp.MustCompile(`\{[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}\}`)
 
 func GUIDFromString(guid string) (*GUID, error) {
 	g := GUID{}
@@ -29,4 +33,17 @@ func GUIDFromString(guid string) (*GUID, error) {
 	copy(g.Data4[:], buf)
 
 	return &g, nil
+}
+
+func randomGUID() (GUID, error) {
+	id, err := uuid.NewV4()
+	if err != nil {
+		return GUID{}, err
+	}
+	validGuid := fmt.Sprintf("{%s}", id.String())
+	guid, err := GUIDFromString(validGuid)
+	if err != nil {
+		return GUID{}, err
+	}
+	return *guid, nil
 }

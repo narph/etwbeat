@@ -28,12 +28,10 @@ func New(b *beat.Beat, conf *common.Config) (beat.Beater, error) {
 	if err != nil {
 		return nil, fmt.Errorf("error reading configuration file: %v", err)
 	}
-
 	consumer, err := etw.NewConsumer(conf, b.Info)
 	if err != nil {
 		return nil, fmt.Errorf("error initializing the consumer: %v", err)
 	}
-	consumer.Config.Providers = c.Providers
 	eb := &ETWbeat{
 		beat:     b,
 		config:   c,
@@ -53,11 +51,14 @@ func (bt *ETWbeat) Run(b *beat.Beat) error {
 	if err != nil {
 		return err
 	}
-
 	var wg sync.WaitGroup
-	wg.Add(1)
-	go bt.processEventLog(&wg, &bt.consumer)
+	for _, provider := range bt.config.Providers {
 
+		// Start a goroutine for each event log.
+		wg.Add(1)
+		//go eb.processEventLog(&wg, provider, state, acker)
+		go bt.process(&wg, provider, &bt.consumer)
+	}
 	wg.Wait()
 	//defer bt.checkpoint.Shutdown()
 
@@ -68,9 +69,7 @@ func (bt *ETWbeat) Run(b *beat.Beat) error {
 	//	defer cancel()
 	//	acker.Wait(ctx)
 	//}
-
 	return nil
-
 }
 
 // Stop stops etwbeat.
@@ -81,10 +80,11 @@ func (etb *ETWbeat) Stop() {
 	}
 }
 
-func (eb *ETWbeat) processEventLog(
+func (eb *ETWbeat) process(
 	wg *sync.WaitGroup,
+	provider config.Provider,
 	consumer *etw.Consumer,
 ) {
 	defer wg.Done()
-	consumer.Run(eb.done, eb.pipeline)
+	consumer.Run(eb.done, eb.pipeline, provider)
 }
