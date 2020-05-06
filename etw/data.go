@@ -1,10 +1,9 @@
 package etw
 
 import (
-	"time"
-
 	"github.com/elastic/beats/v7/libbeat/beat"
 	"github.com/elastic/beats/v7/libbeat/common"
+	"time"
 )
 
 type EventRecord struct {
@@ -59,7 +58,16 @@ func (e *EventRecord) ToEvent() beat.Event {
 	win := common.MapStr{
 		"provider_id": e.EventHeader.ProviderId.String(),
 		"process_id":  e.EventHeader.ProcessId,
+		"thread_id": e.EventHeader.ThreadId,
+		"event_id": e.EventHeader.EventDescriptor.Id,
+		"channel": e.EventHeader.EventDescriptor.Channel,
+		"op_code": e.EventHeader.EventDescriptor.Opcode,
+		"keyword": e.EventHeader.EventDescriptor.Keyword,
+		"activity_id": e.EventHeader.ActivityId.String(),
+		"level": e.EventHeader.EventDescriptor.Level,
 	}
+
+
 
 	m := common.MapStr{
 		"winlog": win,

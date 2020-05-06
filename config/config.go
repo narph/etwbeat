@@ -4,10 +4,11 @@
 package config
 
 type ETWConfig struct {
-	Providers []Provider `config:"providers"`
+	Sessions []Session `config:"sessions"`
 }
 
-type Provider struct {
-	Id          string `config:"id"`
-	SessionName string `config:"session_name"`
+type Session struct {
+	Providers  []string `config:"provider_ids"`
+	Name       string   `config:"name"`
+	TraceLevel string   `config:"trace_level"`
 }

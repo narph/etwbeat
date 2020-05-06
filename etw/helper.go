@@ -7,6 +7,7 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+	"unsafe"
 )
 
 var guidRE = regexp.MustCompile(`\{[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}\}`)
@@ -46,4 +47,22 @@ func randomGUID() (GUID, error) {
 		return GUID{}, err
 	}
 	return *guid, nil
+}
+
+func FromPtrToUTF16(offset unsafe.Pointer) []uint16 {
+	if uintptr(offset) == 0x0 {
+		return nil
+	}
+	offsetPtr := uintptr(offset)
+	utf := make([]uint16, 0)
+	var w uint16
+	for {
+		w = *((*uint16)(unsafe.Pointer(offsetPtr)))
+		if w == 0 {
+			break
+		}
+		utf = append(utf, w)
+		offsetPtr += 2
+	}
+	return utf
 }

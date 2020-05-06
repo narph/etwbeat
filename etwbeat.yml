@@ -7,11 +7,12 @@
 #======================= ETWbeat specific options ===========================
 
 # providers specifies a list of providers.
-etwbeat.providers:
-- id: "{1C95126E-7EEA-49A9-A3FE-A378B03DDB4D}"
-  #"{E13C0D23-CCBC-4E12-931B-D9CC2EEE27E4}"
-  #"{EDD08927-9CC4-4E65-B970-C2560FB5C289}"
-  session_name: "dnssession"
+etwbeat.sessions:
+  - name: "dnssession"
+    provider_ids: ["{EDD08927-9CC4-4E65-B970-C2560FB5C289}"]
+    trace_level: "verbose"
+    match_keywords:
+
 
 #================================ General =====================================
 

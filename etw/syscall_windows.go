@@ -1,20 +1,28 @@
 package etw
 
+import "C"
 import (
 	"fmt"
 	"syscall"
 	"unsafe"
 )
 
+const (
+	ERROR_INSUFFICIENT_BUFFER syscall.Errno = 122
+	ERROR_NOT_FOUND           syscall.Errno = 23
+)
+
 var (
-	advapi         = syscall.NewLazyDLL("advapi32.dll")
-	closeTrace     = advapi.NewProc("CloseTrace")
-	controlTraceW  = advapi.NewProc("ControlTraceW")
-	enableTraceEx2 = advapi.NewProc("EnableTraceEx2")
-	openTraceW     = advapi.NewProc("OpenTraceW")
-	processTrace   = advapi.NewProc("ProcessTrace")
-	queryTraceW    = advapi.NewProc("QueryTraceW")
-	startTraceW    = advapi.NewProc("StartTraceW")
+	advapi                               = syscall.NewLazyDLL("advapi32.dll")
+	tdh                                  = syscall.NewLazyDLL("tdh.dll")
+	closeTrace                           = advapi.NewProc("CloseTrace")
+	controlTraceW                        = advapi.NewProc("ControlTraceW")
+	enableTraceEx2                       = advapi.NewProc("EnableTraceEx2")
+	openTraceW                           = advapi.NewProc("OpenTraceW")
+	processTrace                         = advapi.NewProc("ProcessTrace")
+	queryTraceW                          = advapi.NewProc("QueryTraceW")
+	startTraceW                          = advapi.NewProc("StartTraceW")
+	tdhEnumerateProviderFieldInformation = tdh.NewProc("TdhEnumerateProviderFieldInformation")
 )
 
 type EventTraceProperties struct {
@@ -155,6 +163,20 @@ type FileTime struct {
 	dwHighDateTime uint32
 }
 
+type EVENT_FIELD_TYPE uint32
+type PROVIDER_FIELD_INFO struct {
+	NameOffset        uint32
+	DescriptionOffset uint32
+	Value             uint64
+}
+type PROVIDER_FIELD_INFOARRAY struct {
+	NumberOfElements uint32
+	FieldType        EVENT_FIELD_TYPE
+	FieldInfoArray   [ANYSIZE_ARRAY]PROVIDER_FIELD_INFO
+}
+
+const ANYSIZE_ARRAY = 100
+
 func (e *EventTraceLogfile) SetProcessTraceMode(ptm uint32) {
 	e.Union1 = ptm
 }
@@ -235,4 +257,44 @@ func _CloseTrace(traceHandle uint64) (uint32, error) {
 		return uint32(r1), nil
 	}
 	return uint32(r1), err
+}
+
+func _TdhEnumerateProviderFieldInformation(providerId *GUID, field_type EVENT_FIELD_TYPE, lpBuffer *byte, size *uint32) error {
+	r0, _, _ := tdhEnumerateProviderFieldInformation.Call(uintptr(unsafe.Pointer(providerId)),
+		uintptr(field_type),
+		uintptr(unsafe.Pointer(lpBuffer)),
+		uintptr(unsafe.Pointer(size)))
+	if r0 == 0 {
+		return nil
+	}
+	return syscall.Errno(r0)
+}
+
+func TdhEnumerateProviderFieldInformation(providerId *GUID, field_type EVENT_FIELD_TYPE) error {
+	var bufSize uint32
+	var buff []byte
+	err := _TdhEnumerateProviderFieldInformation(providerId, field_type, nil, &bufSize)
+	if err == ERROR_INSUFFICIENT_BUFFER {
+		buff = make([]byte, bufSize)
+		bufSize = uint32(len(buff))
+		err = _TdhEnumerateProviderFieldInformation(providerId, field_type, &buff[0], &bufSize)
+	}
+	if err == ERROR_NOT_FOUND {
+		return err
+	}
+	if err == nil {
+		providerFields := (*PROVIDER_FIELD_INFOARRAY)(unsafe.Pointer(&buff[0]))
+		for i := 0; i < int(providerFields.NumberOfElements); i++ {
+			pProvider:= uintptr(unsafe.Pointer(providerFields))
+			pNameOffset:= uintptr(providerFields.FieldInfoArray[i].NameOffset)
+			wchar := FromPtrToUTF16(unsafe.Pointer(pProvider + pNameOffset))
+			var keyword string
+			for _, e:= range  wchar {
+				 keyword += string(e)
+			 }
+			_= keyword
+		}
+	}
+
+	return nil
 }

@@ -16,10 +16,10 @@ const (
 	EVENT_TRACE_CONTROL_STOP            = 1
 	EVENT_CONTROL_CODE_DISABLE_PROVIDER = 0
 	EVENT_CONTROL_CODE_ENABLE_PROVIDER  = 1
-	TRACE_LEVEL_VERBOSE                 = 5
 	PROCESS_TRACE_MODE_REAL_TIME        = 0x00000100
 	PROCESS_TRACE_MODE_RAW_TIMESTAMP    = 0x00001000
 	PROCESS_TRACE_MODE_EVENT_RECORD     = 0x10000000
+
 	EVENT_HEADER_FLAG_STRING_ONLY       = 0x0004
 	EVENT_HEADER_PROPERTY_XML           = 0x0001
 )
@@ -54,7 +54,7 @@ func NewConsumer(options *common.Config, beatInfo beat.Info) (*Consumer, error) 
 	}, nil
 }
 
-func (c *Consumer) Run(done <-chan struct{}, pipeline beat.Pipeline, provider config.Provider) {
+func (c *Consumer) Run(done <-chan struct{}, pipeline beat.Pipeline, session config.Session) {
 	client, err := c.connect(pipeline)
 	if err != nil {
 		logp.Warn("EventLog[%s] Pipeline error. Failed to connect to publisher pipeline",
@@ -68,23 +68,23 @@ func (c *Consumer) Run(done <-chan struct{}, pipeline beat.Pipeline, provider co
 		<-done
 		c.client.Close()
 	}()
-	sessionHandle, sessionProperties, err := enableTrace(provider.Id, provider.SessionName)
+	sessionHandle, sessionProperties, err := enableTrace(session)
 	if err != nil {
-		c.log.Errorf("session %s could not be enabled: %v", provider.SessionName, err)
+		c.log.Errorf("session %s could not be enabled: %v", session.Name, err)
 		return
 	}
 	defer func() {
-		guid, _ := GUIDFromString(provider.Id)
+		guid, _ := GUIDFromString(session.Providers[0])
 
-		c.log.Info("Session %s, stop processing.", provider.SessionName)
+		c.log.Info("Session %s, stop processing.", session.Name)
 		if err := stopTrace(sessionHandle, sessionProperties, guid); err != nil {
-			c.log.Errorf("session %s could not be closed: %v", provider.SessionName, err)
+			c.log.Errorf("session %s could not be closed: %v", session.Name, err)
 			return
 		}
 	}()
-	err = c.readEvents(provider.SessionName)
+	err = c.readEvents(session.Name)
 	if err != nil {
-		c.log.Errorf("session %s could not read events: %v", provider.SessionName, err)
+		c.log.Errorf("session %s could not read events: %v", session.Name, err)
 		return
 	}
 }

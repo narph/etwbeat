@@ -52,12 +52,12 @@ func (bt *ETWbeat) Run(b *beat.Beat) error {
 		return err
 	}
 	var wg sync.WaitGroup
-	for _, provider := range bt.config.Providers {
+	for _, session := range bt.config.Sessions {
 
 		// Start a goroutine for each event log.
 		wg.Add(1)
 		//go eb.processEventLog(&wg, provider, state, acker)
-		go bt.process(&wg, provider, &bt.consumer)
+		go bt.process(&wg, session, &bt.consumer)
 	}
 	wg.Wait()
 	//defer bt.checkpoint.Shutdown()
@@ -82,9 +82,9 @@ func (etb *ETWbeat) Stop() {
 
 func (eb *ETWbeat) process(
 	wg *sync.WaitGroup,
-	provider config.Provider,
+	session config.Session,
 	consumer *etw.Consumer,
 ) {
 	defer wg.Done()
-	consumer.Run(eb.done, eb.pipeline, provider)
+	consumer.Run(eb.done, eb.pipeline, session)
 }
