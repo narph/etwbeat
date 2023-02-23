@@ -297,11 +297,6 @@ func (self *ProcMem) Get(pid int) error {
 
 	self.Resident = uint64(counters.WorkingSetSize)
 	self.Size = uint64(counters.PrivateUsage)
-	self.PageFaults = uint64(counters.QuotaPagedPoolUsage)
-	self.Share = uint64(counters.PagefileUsage)
-	self.MajorFaults = uint64(counters.PeakPagefileUsage)
-	self.MinorFaults = uint64(counters.QuotaNonPagedPoolUsage)
-
 	return nil
 }
 

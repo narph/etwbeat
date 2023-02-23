@@ -170,6 +170,7 @@ github.com/elastic/beats/v7/libbeat/processors
 github.com/elastic/beats/v7/libbeat/processors/actions
 github.com/elastic/beats/v7/libbeat/processors/add_cloud_metadata
 github.com/elastic/beats/v7/libbeat/processors/add_docker_metadata
+github.com/elastic/beats/v7/libbeat/processors/add_formatted_index
 github.com/elastic/beats/v7/libbeat/processors/add_host_metadata
 github.com/elastic/beats/v7/libbeat/processors/add_id
 github.com/elastic/beats/v7/libbeat/processors/add_id/generator
@@ -346,9 +347,9 @@ github.com/konsorten/go-windows-terminal-sequences
 github.com/magefile/mage/mg
 github.com/magefile/mage/sh
 github.com/magefile/mage/target
-# github.com/mattn/go-colorable v0.0.8
+# github.com/mattn/go-colorable v0.1.2
 github.com/mattn/go-colorable
-# github.com/mattn/go-isatty v0.0.2
+# github.com/mattn/go-isatty v0.0.9
 github.com/mattn/go-isatty
 # github.com/mattn/go-shellwords v1.0.7
 github.com/mattn/go-shellwords
@@ -376,6 +377,8 @@ github.com/pierrec/lz4/internal/xxh32
 github.com/pierrre/gotestcover
 # github.com/pkg/errors v0.9.1
 github.com/pkg/errors
+# github.com/pmezard/go-difflib v1.0.0
+github.com/pmezard/go-difflib/difflib
 # github.com/prometheus/procfs v0.0.11
 github.com/prometheus/procfs
 github.com/prometheus/procfs/internal/fs
@@ -406,6 +409,8 @@ github.com/sirupsen/logrus
 github.com/spf13/cobra
 # github.com/spf13/pflag v1.0.3
 github.com/spf13/pflag
+# github.com/stretchr/testify v1.4.0
+github.com/stretchr/testify/assert
 # github.com/tsg/go-daemon v0.0.0-20200207173439-e704b93fd89b
 github.com/tsg/go-daemon
 # github.com/urso/go-bin v0.0.0-20180220135811-781c575c9f0e
@@ -452,7 +457,7 @@ go.uber.org/zap/internal/color
 go.uber.org/zap/internal/exit
 go.uber.org/zap/zapcore
 go.uber.org/zap/zaptest/observer
-# golang.org/x/crypto v0.0.0-20200204104054-c9f3fb736b72
+# golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
 golang.org/x/crypto/cast5
 golang.org/x/crypto/ed25519
 golang.org/x/crypto/ed25519/internal/edwards25519
@@ -471,10 +476,11 @@ golang.org/x/exp/cmd/apidiff
 # golang.org/x/lint v0.0.0-20191125180803-fdd1cda4f05f
 golang.org/x/lint
 golang.org/x/lint/golint
-# golang.org/x/mod v0.2.0
+# golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4
+golang.org/x/mod/internal/lazyregexp
 golang.org/x/mod/module
 golang.org/x/mod/semver
-# golang.org/x/net v0.0.0-20200226121028-0de0cce0169b
+# golang.org/x/net v0.0.0-20220722155237-a158d28d115b
 golang.org/x/net/bpf
 golang.org/x/net/context
 golang.org/x/net/context/ctxhttp
@@ -497,16 +503,21 @@ golang.org/x/oauth2/google
 golang.org/x/oauth2/internal
 golang.org/x/oauth2/jws
 golang.org/x/oauth2/jwt
-# golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
+# golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4
 golang.org/x/sync/errgroup
-# golang.org/x/sys v0.0.0-20200331124033-c3d80250170d
+# golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f
+golang.org/x/sys/execabs
+golang.org/x/sys/internal/unsafeheader
+golang.org/x/sys/plan9
 golang.org/x/sys/unix
 golang.org/x/sys/windows
 golang.org/x/sys/windows/registry
 golang.org/x/sys/windows/svc
 golang.org/x/sys/windows/svc/debug
 golang.org/x/sys/windows/svc/eventlog
-# golang.org/x/text v0.3.2
+# golang.org/x/term v0.0.0-20210927222741-03fcf44c2211
+golang.org/x/term
+# golang.org/x/text v0.3.8
 golang.org/x/text/cases
 golang.org/x/text/collate
 golang.org/x/text/internal
@@ -521,7 +532,7 @@ golang.org/x/text/unicode/bidi
 golang.org/x/text/unicode/norm
 # golang.org/x/time v0.0.0-20191024005414-555d28b269f0
 golang.org/x/time/rate
-# golang.org/x/tools v0.0.0-20200331202046-9d5940d49312
+# golang.org/x/tools v0.1.12
 golang.org/x/tools/cmd/goimports
 golang.org/x/tools/go/analysis
 golang.org/x/tools/go/analysis/passes/inspect
@@ -531,19 +542,23 @@ golang.org/x/tools/go/buildutil
 golang.org/x/tools/go/gcexportdata
 golang.org/x/tools/go/internal/gcimporter
 golang.org/x/tools/go/internal/packagesdriver
+golang.org/x/tools/go/internal/pkgbits
 golang.org/x/tools/go/packages
 golang.org/x/tools/go/types/objectpath
 golang.org/x/tools/go/types/typeutil
 golang.org/x/tools/go/vcs
 golang.org/x/tools/internal/analysisinternal
+golang.org/x/tools/internal/event
+golang.org/x/tools/internal/event/core
+golang.org/x/tools/internal/event/keys
+golang.org/x/tools/internal/event/label
 golang.org/x/tools/internal/fastwalk
 golang.org/x/tools/internal/gocommand
 golang.org/x/tools/internal/gopathwalk
 golang.org/x/tools/internal/imports
 golang.org/x/tools/internal/packagesinternal
-# golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543
-golang.org/x/xerrors
-golang.org/x/xerrors/internal
+golang.org/x/tools/internal/typeparams
+golang.org/x/tools/internal/typesinternal
 # google.golang.org/api v0.15.0
 google.golang.org/api/googleapi
 google.golang.org/api/googleapi/transport
