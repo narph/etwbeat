@@ -7,7 +7,6 @@ import (
 	"unsafe"
 
 	"github.com/pkg/errors"
-
 )
 
 var (
@@ -66,18 +65,6 @@ type RtlUserProcessParameters struct {
 	DllPath                UnicodeString
 	ImagePathName          UnicodeString
 	CommandLine            UnicodeString
-}
-
-type MemoryBasicInformation struct {
-	BaseAddress       uint64
-	AllocationBase    uint64
-	AllocationProtect uint32
-	Allignment        uint32
-	RegionSize        uint64
-	State             uint32
-	Protect           uint32
-	Type              uint32
-	Allignment2       uint32
 }
 
 func (dt DriveType) String() string {
@@ -592,7 +579,6 @@ func GetTickCount64() (uptime uint64, err error) {
 	}
 	return uptime, nil
 }
-
 
 // Windows API calls
 //sys   _GlobalMemoryStatusEx(buffer *MemoryStatusEx) (err error) = kernel32.GlobalMemoryStatusEx
